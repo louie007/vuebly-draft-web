@@ -2,7 +2,6 @@
 process.env.NODE_ENV = 'production'
 
 var ora = require('ora')
-var rm = require('rimraf')
 var chalk = require('chalk')
 var path = require('path')
 var webpack = require('webpack')
@@ -32,7 +31,7 @@ var webModeConfig = merge(baseWebpackConfig('vue'), {
     app: [config.build.entryWeb]
   },
   output: {
-    path: config.build.distWeb,
+    path: config.build.distWebStatic,
     filename: 'js/[name].[chunkhash].js',
     chunkFilename: 'js/[id].[chunkhash].js'
   },
@@ -81,7 +80,7 @@ var webModeConfig = merge(baseWebpackConfig('vue'), {
     new CopyWebpackPlugin([
       {
         from: utils.resolve('static'),
-        to: config.build.distWeb,
+        to: config.build.distWebStatic,
         ignore: ['.*']
       }
     ])
@@ -91,7 +90,7 @@ var webModeConfig = merge(baseWebpackConfig('vue'), {
 var weexModeConfig = merge(baseWebpackConfig('weex'), {
   entry: utils.buildEntry(),
   output: {
-    path: config.build.distWeex,
+    path: config.build.distWeexStatic,
     filename: 'js/[name].js'
   },
   plugins: commonPlugins.concat([
@@ -99,30 +98,27 @@ var weexModeConfig = merge(baseWebpackConfig('weex'), {
     new CopyWebpackPlugin([
       {
         from: utils.resolve('static'),
-        to: config.build.distWeex,
+        to: config.build.distWeexStatic,
         ignore: ['.*']
       }
     ])
   ])// End
 })
 
-rm(config.build.distRoot, err => {
+webpack([webModeConfig, weexModeConfig], function (err, stats) {
+  spinner.stop()
   if (err) throw err
-  webpack([webModeConfig, weexModeConfig], function (err, stats) {
-    spinner.stop()
-    if (err) throw err
-    process.stdout.write(stats.toString({
-      colors: true,
-      modules: false,
-      children: false,
-      chunks: false,
-      chunkModules: false
-    }) + '\n\n')
+  process.stdout.write(stats.toString({
+    colors: true,
+    modules: false,
+    children: false,
+    chunks: false,
+    chunkModules: false
+  }) + '\n\n')
 
-    console.log(chalk.cyan('  Build complete.\n'))
-    console.log(chalk.yellow(
-      '  Tip: built files are meant to be served over an HTTP server.\n' +
-      '  Opening index.html over file:// won\'t work.\n'
-    ))
-  })
+  console.log(chalk.cyan('  Build complete.\n'))
+  console.log(chalk.yellow(
+    '  Tip: built files are meant to be served over an HTTP server.\n' +
+    '  Opening index.html over file:// won\'t work.\n'
+  ))
 })
