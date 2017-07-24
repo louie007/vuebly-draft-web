@@ -13,9 +13,9 @@
     "ios"
   ],
   "scripts": {
-    "build": "node build/webpack.build.conf.js",
-    "copy:ios": "rm -rf ios/assets && cp -rf dist/weex ios/assets",
-    "copy:android": "rm -rf android/app/src/main/assets && cp -rf dist/weex android/app/src/main/assets",
+    "build": "rm -rf dist/ && rm -rf src/entry/ && node build/webpack.build.conf.js",
+    "copy:ios": "rm -rf ios/assets/ && cp -rf dist/weex/ ios/assets/",
+    "copy:android": "rm -rf android/app/src/main/assets/ && cp -rf dist/weex/ android/app/src/main/assets/",
     "copy": "npm run copy:ios && npm run copy:android",
     "debug": "weex-devtool",
     "dev": "node build/webpack.dev.conf.js",

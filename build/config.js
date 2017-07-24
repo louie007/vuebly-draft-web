@@ -5,9 +5,11 @@ module.exports = {
     port: 8080,
     distRoot: path.resolve(__dirname, '../dist'),
     distWeb: path.resolve(__dirname, '../dist/web'),
+    distWebStatic: path.resolve(__dirname, '../dist/web/static'),
     distWebIndex: path.resolve(__dirname, '../dist/web/index.html'),
     distWeex: path.resolve(__dirname, '../dist/weex'),
-    distWeexIndex: path.resolve(__dirname, '../dist/weex/index.js'),
+    distWeexStatic: path.resolve(__dirname, '../dist/weex/static'),
+    distWeexIndex: path.resolve(__dirname, '../dist/weex/static/js/index.js'),
     entryWeb: path.resolve(__dirname, '../src/app.web.js'),
     assetsPublicPath: '/',
     sourceMap: true
