@@ -16,4 +16,4 @@ npm run build
 
 ```
 
-For detailed explanation on how things work, checkout the [guide](http://vuebly.github.io/webpack/) and [docs for Vuebly](https://github.com/louie007/vuebly).
+For detailed explanation on how things work, checkout the [guide](http://vuebly.github.io/vuebly-templates/) and [docs for Vuebly](https://github.com/louie007/vuebly).

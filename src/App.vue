@@ -1,25 +1,24 @@
 <template>
-  <div class="wrapper" @click="update">
-    <text class="title">Bonjour {{target}}!</text>
+  <div id="weex-root">
+    <transition name="fade" mode="out-in">
+      <router-view></router-view>
+    </transition>
   </div>
 </template>
 
-<style>
-  .wrapper { align-items: center; padding-top: 120px; }
-  .title { font-size: 48px; }
-  .logo { width: 360px; height: 82px; }
-</style>
-
 <script>
-  export default {
-    data: {
-      target: 'Vuebly'
-    },
-    methods: {
-      update: function (e) {
-        this.target = 'World'
-        console.log('target:', this.target)
-      }
-    }
-  }
+  export default {}
 </script>
+
+<style>
+  body {
+    margin: 0;
+  }
+
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .3s
+  }
+  .fade-enter, .fade-leave-active {
+    opacity: 0
+  }
+</style>
