@@ -13,10 +13,13 @@
     "ios"
   ],
   "scripts": {
-    "lint": "eslint --ext .js,.vue src",
-    "dev": "node build/webpack.dev.conf.js",
     "build": "node build/webpack.build.conf.js",
-    "debug": "weex-devtool"
+    "copy:ios": "rm -rf ios/assets && cp -rf dist/weex ios/assets",
+    "copy:android": "rm -rf android/app/src/main/assets && cp -rf dist/weex android/app/src/main/assets",
+    "copy": "npm run copy:ios && npm run copy:android",
+    "debug": "weex-devtool",
+    "dev": "node build/webpack.dev.conf.js",
+    "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
     "loglevel": "^1.4.1",
