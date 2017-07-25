@@ -27,6 +27,7 @@
     "vuex": "^2.3.1",
     "vuex-router-sync": "^4.2.0",
     "weex-loader": "^0.4.5",
+    "weex-styler": "git+https://github.com/louie007/weex-styler.git",
     "weex-vue-loader": "^0.4.0",
     "weex-vue-render": "^0.11.57"
   },
