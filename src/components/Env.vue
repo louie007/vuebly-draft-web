@@ -27,13 +27,13 @@ export default {
 }
 </script>
 
-<style lang="scss" scope>
-  #weex-root {
-    .vuebly-env-info {
-      margin-bottom: 0.5rem;
-      text-align: center;
-      font-size: 0.4rem;
-      color: #e91e63;
-    }
-  }
+<style lang="sass" scope>
+
+.container .vuebly-env-info {
+  margin-bottom: 0.5rem;
+  text-align: center;
+  font-size: 0.4rem;
+  color: #e91e63;
+}
+
 </style>

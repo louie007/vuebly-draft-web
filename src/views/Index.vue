@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <image class="vuebly-logo-image" src="/static/images/vuebly.png" />
+    <image class="vuebly-logo-image" style="width:200px; height:200px;" src="/static/images/vuebly.png" />
     <button @click="click" class="vuebly-button">
       <text class="vuebly-button-text">Say Hello</text>
     </button>
@@ -26,28 +26,16 @@ export default {
 }
 </script>
 
-<style lang="scss" scope>
+<style lang="sass" scope>
   @import '../assets/css/base';
+</style>
+<style lang="sass" scope>
 
-  #weex-root {
-    .vuebly-logo-image {
-      margin-top: 3rem;
-      margin-bottom: 1rem;
-      height: 3rem;
-      width: 3rem;
-    }
-    .vuebly-button {
-      width: 9rem;
-      height: 1.2rem;
-      border-radius: 0.6rem;
-      background-color: #e91e63;
-      justify-content: center;
-      align-items: center;
-      border: none;
-    }
-    .vuebly-button .vuebly-button-text {
-      text-align: center;
-      color: white;
-    }
-  }
+.container .vuebly-logo-image {
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  height: 3rem;
+  width: 3rem;
+}
+
 </style>

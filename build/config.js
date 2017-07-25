@@ -10,7 +10,7 @@ module.exports = {
     distWeex: path.resolve(__dirname, '../dist/weex'),
     distWeexStatic: path.resolve(__dirname, '../dist/weex/static'),
     distWeexIndex: path.resolve(__dirname, '../dist/weex/static/js/index.js'),
-    entryWeb: path.resolve(__dirname, '../src/app.web.js'),
+    entryWeb: path.resolve(__dirname, '../src/main.web.js'),
     assetsPublicPath: '/',
     sourceMap: true
   },

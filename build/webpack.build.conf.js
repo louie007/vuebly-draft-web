@@ -17,15 +17,6 @@ var baseWebpackConfig = require('./webpack.base.conf')
 var spinner = ora('building for production...')
 spinner.start()
 
-var commonPlugins =  [
-  new webpack.optimize.UglifyJsPlugin({
-    compress: {
-      warnings: false
-    },
-    sourceMap: config.build.sourceMap
-  })
-]
-
 var webModeConfig = merge(baseWebpackConfig('vue'), {
   entry: {
     app: [config.build.entryWeb]
@@ -37,7 +28,13 @@ var webModeConfig = merge(baseWebpackConfig('vue'), {
   },
   devtool: config.build.sourceMap ? '#source-map' : false,
   externals: {},
-  plugins: commonPlugins.concat([
+  plugins: [
+    // new webpack.optimize.UglifyJsPlugin({
+    //   compress: {
+    //     warnings: false
+    //   },
+    //   sourceMap: config.build.sourceMap
+    // }),
     // Generate dist index.html with correct asset hash for caching.
     new HtmlWebpackPlugin({
       filename: config.build.distWebIndex,
@@ -78,7 +75,7 @@ var webModeConfig = merge(baseWebpackConfig('vue'), {
         ignore: ['.*']
       }
     ])
-  ])// End
+  ]// End
 })
 
 var weexModeConfig = merge(baseWebpackConfig('weex'), {
@@ -88,7 +85,6 @@ var weexModeConfig = merge(baseWebpackConfig('weex'), {
     filename: 'js/[name].js'
   },
   plugins: [
-    // Copy custom static assets
     new CopyWebpackPlugin([
       {
         from: utils.resolve('static'),
@@ -96,9 +92,9 @@ var weexModeConfig = merge(baseWebpackConfig('weex'), {
         ignore: ['.*']
       }
     ])
-  ]// End
+  ] // End
 })
-console.log(JSON.stringify(weexModeConfig))
+
 webpack([webModeConfig, weexModeConfig], function (err, stats) {
   spinner.stop()
   if (err) throw err

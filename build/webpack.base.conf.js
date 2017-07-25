@@ -40,27 +40,6 @@ module.exports = function getBaseConfig (_loader) {
           }
         },
         {
-          test: /\.vue$/,
-          loader: _loader + '-loader', // native => 'weex-loader', web => 'vue-loader'
-          include: [utils.resolve('src'), utils.resolve('test')],
-          options: {
-            loaders: utils.cssLoaders({
-              sourceMap: process.env.NODE_ENV === 'production'
-                ? config.build.sourceMap
-                : config.dev.sourceMap,
-              extract: _loader === 'web'
-            }),
-            compilerModules: [
-              {
-                postTransformNode: el => {
-                  el.staticStyle = `$processStyle(${el.staticStyle})`
-                  el.styleBinding = `$processStyle(${el.styleBinding})`
-                }
-              }
-            ]
-          }
-        },
-        {
           test: /\.js$/,
           loader: 'babel-loader',
           include: [utils.resolve('build'), utils.resolve('src'), utils.resolve('test')]
@@ -89,7 +68,34 @@ module.exports = function getBaseConfig (_loader) {
             name: 'fonts/[name].[hash:7].[ext]'
           }
         }
-      ]
+      ].concat(_loader === 'vue'
+        ? [{
+            test: /\.vue$/,
+            loader: 'vue-loader', // native => 'weex-loader', web => 'vue-loader'
+            include: [utils.resolve('src'), utils.resolve('test')],
+            options: {
+              loaders: utils.cssLoaders({
+                sourceMap: process.env.NODE_ENV === 'production'
+                  ? config.build.sourceMap
+                  : config.dev.sourceMap,
+                extract: true
+              }),
+              compilerModules: [
+                {
+                  postTransformNode: el => {
+                    el.staticStyle = `$processStyle(${el.staticStyle})`
+                    el.styleBinding = `$processStyle(${el.styleBinding})`
+                  }
+                }
+              ]
+            }
+          }]
+        : [{
+            test: /\.vue$/,
+            loader: 'weex-loader', // native => 'weex-loader', web => 'vue-loader'
+            include: [utils.resolve('src'), utils.resolve('test')]
+          }]
+      )
     },
     plugins: [
       new webpack.DefinePlugin({
@@ -104,22 +110,6 @@ module.exports = function getBaseConfig (_loader) {
         banner: '// { "framework": "Vue" }\n',
         raw: true
       })
-    ].concat(_loader === 'vue'
-    ? [
-      new webpack.ProvidePlugin({
-        Vue: 'vue/dist/vue.runtime.js'
-      }),
-      new HtmlWebpackPlugin({
-        filename: 'index.html',
-        template: 'index.html',
-        inject: true
-      }),
-      new HtmlWebpackPlugin({
-        filename: 'qrcode.html',
-        template: 'qrcode.tpl',
-        chunks: []
-      })
     ]
-    : [])
   }
 }
