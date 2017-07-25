@@ -27,7 +27,7 @@ export default {
 </script>
 
 <style lang="scss" scope>
-  @import '../assets/css/base.scss';
+  @import '../assets/css/base';
 
   #weex-root {
     .vuebly-logo-image {

@@ -2,7 +2,7 @@
   <div class="container">
     <text class="vuebly-hello-text">{{ hello }}</text>
     <text class="vuebly-countdown-text">Countdown: {{ countdown }} </text>
-    <env title="platform"></env>
+    <env title="deviceWidth"></env>
     <button @click="click" class="vuebly-button">
       <text class="vuebly-button-text">Go back</text>
     </button>
@@ -51,7 +51,7 @@ export default {
 </script>
 
 <style lang="scss" scope>
-  @import '../assets/css/base.scss';
+  @import '../assets/css/base';
 
   #weex-root {
     .vuebly-hello-text {

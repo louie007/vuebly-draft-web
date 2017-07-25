@@ -1,5 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
 var utils = require('./utils')
 var config = require('./config')
 
@@ -19,7 +20,7 @@ module.exports = function getBaseConfig (_loader) {
     resolve: {
       extensions: ['.js', '.vue', '.json'],
       alias: {
-        'vue$': 'vue/dist/vue.runtime.common.js',
+        'vue$': 'vue/dist/vue.runtime.esm.js',
         'assets': utils.resolve('src/assets'),
         'components': utils.resolve('src/components'),
         'mixins': utils.resolve('src/mixins'),
@@ -47,7 +48,7 @@ module.exports = function getBaseConfig (_loader) {
               sourceMap: process.env.NODE_ENV === 'production'
                 ? config.build.sourceMap
                 : config.dev.sourceMap,
-              extract: process.env.NODE_ENV === 'production'
+              extract: _loader === 'web'
             }),
             compilerModules: [
               {
@@ -89,6 +90,36 @@ module.exports = function getBaseConfig (_loader) {
           }
         }
       ]
-    }
+    },
+    plugins: [
+      new webpack.DefinePlugin({
+        'process.env': {
+          HOST_IP: JSON.stringify(require('ip').address()),
+          LOADER: _loader === 'weex'
+          ? '"weex"'
+          : '"vue"'
+        }
+      }),
+      new webpack.BannerPlugin({
+        banner: '// { "framework": "Vue" }\n',
+        raw: true
+      })
+    ].concat(_loader === 'vue'
+    ? [
+      new webpack.ProvidePlugin({
+        Vue: 'vue/dist/vue.runtime.js'
+      }),
+      new HtmlWebpackPlugin({
+        filename: 'index.html',
+        template: 'index.html',
+        inject: true
+      }),
+      new HtmlWebpackPlugin({
+        filename: 'qrcode.html',
+        template: 'qrcode.tpl',
+        chunks: []
+      })
+    ]
+    : [])
   }
 }

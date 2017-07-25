@@ -8,7 +8,7 @@ var webpack = require('webpack')
 var merge = require('webpack-merge')
 var CopyWebpackPlugin = require('copy-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
-var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+// var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 
 var utils = require('./utils')
 var config = require('./config')
@@ -34,12 +34,6 @@ var webModeConfig = merge(baseWebpackConfig('vue'), {
     path: config.build.distWebStatic,
     filename: 'js/[name].[chunkhash].js',
     chunkFilename: 'js/[id].[chunkhash].js'
-  },
-  module: {
-    rules: utils.styleLoaders({
-      sourceMap: config.build.sourceMap,
-      extract: true
-    })
   },
   devtool: config.build.sourceMap ? '#source-map' : false,
   externals: {},
@@ -93,7 +87,7 @@ var weexModeConfig = merge(baseWebpackConfig('weex'), {
     path: config.build.distWeexStatic,
     filename: 'js/[name].js'
   },
-  plugins: commonPlugins.concat([
+  plugins: [
     // Copy custom static assets
     new CopyWebpackPlugin([
       {
@@ -102,9 +96,9 @@ var weexModeConfig = merge(baseWebpackConfig('weex'), {
         ignore: ['.*']
       }
     ])
-  ])// End
+  ]// End
 })
-
+console.log(JSON.stringify(weexModeConfig))
 webpack([webModeConfig, weexModeConfig], function (err, stats) {
   spinner.stop()
   if (err) throw err
