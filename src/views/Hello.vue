@@ -55,14 +55,14 @@ export default {
 </style>
 <style lang="sass" scope>
 
-.container .vuebly-hello-text {
+.vuebly-hello-text {
   margin-top: 3rem;
   text-align: center;
   font-size: 0.5rem;
   height: 2rem;
   color: #575757;
 }
-.container .vuebly-countdown-text {
+.vuebly-countdown-text {
   margin-bottom: 0.5rem;
   text-align: center;
   font-size: 0.4rem;

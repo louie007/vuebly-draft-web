@@ -4,7 +4,7 @@
   justify-content: center;
 }
 
-.container .vuebly-button {
+button.vuebly-button {
   width: 9rem;
   height: 1.2rem;
   border-radius: 0.6rem;
@@ -13,7 +13,7 @@
   align-items: center;
   border: none;
 }
-.container .vuebly-button .vuebly-button-text {
+button.vuebly-button .vuebly-button-text {
   text-align: center;
   color: white;
 }

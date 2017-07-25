@@ -31,7 +31,7 @@ export default {
 </style>
 <style lang="sass" scope>
 
-.container .vuebly-logo-image {
+figure.vuebly-logo-image {
   margin-top: 3rem;
   margin-bottom: 1rem;
   height: 3rem;

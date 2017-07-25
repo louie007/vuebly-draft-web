@@ -71,7 +71,7 @@ module.exports = function getBaseConfig (_loader) {
       ].concat(_loader === 'vue'
         ? [{
             test: /\.vue$/,
-            loader: 'vue-loader', // native => 'weex-loader', web => 'vue-loader'
+            loader: 'vue-loader', // web => 'vue-loader'
             include: [utils.resolve('src'), utils.resolve('test')],
             options: {
               loaders: utils.cssLoaders({
@@ -92,7 +92,7 @@ module.exports = function getBaseConfig (_loader) {
           }]
         : [{
             test: /\.vue$/,
-            loader: 'weex-loader', // native => 'weex-loader', web => 'vue-loader'
+            loader: 'weex-loader', // native => 'weex-loader'
             include: [utils.resolve('src'), utils.resolve('test')]
           }]
       )
