@@ -29,13 +29,13 @@ export default {
 <style>
   @import '../assets/css/base.scss';
 
-  .container .vuebly-logo-image {
+  .vuebly-logo-image {
     margin-top: 3rem;
     margin-bottom: 1rem;
     height: 3rem;
     width: 3rem;
   }
-  .container .vuebly-hello-text {
+  .vuebly-hello-text {
     color: red;
   }
 </style>

@@ -29,7 +29,7 @@ export default {
 
 <style>
 
-.container .vuebly-env-info {
+.vuebly-env-info {
   margin-bottom: 0.5rem;
   text-align: center;
   font-size: 0.4rem;
