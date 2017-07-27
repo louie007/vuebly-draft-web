@@ -27,9 +27,9 @@ export default {
 }
 </script>
 
-<style lang="sass" scope>
+<style>
 
-.vuebly-env-info {
+.container .vuebly-env-info {
   margin-bottom: 0.5rem;
   text-align: center;
   font-size: 0.4rem;
