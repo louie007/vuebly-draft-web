@@ -6,31 +6,31 @@
 
 process.env.NODE_ENV = 'production'
 
-const ora = require('ora')
-const chalk = require('chalk')
-const webpack = require('webpack')
-const merge = require('webpack-merge')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-// const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+var ora = require('ora')
+var chalk = require('chalk')
+var webpack = require('webpack')
+var merge = require('webpack-merge')
+var CopyWebpackPlugin = require('copy-webpack-plugin')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
+// var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 
-const utils = require('./utils')
-const config = require('./config')
-const baseWebpackConfig = require('./webpack.base.conf')
+var utils = require('./utils')
+var config = require('./config')
+var baseWebpackConfig = require('./webpack.base.conf')
 
 /**
  * Webpack config for HTML5 Web mode: 'webModeConfig'
  * Single entry file for web mode: 'config.dev.webEntry'
  */
 
-const webModeConfig = merge(baseWebpackConfig('vue'), {
+var webModeConfig = merge(baseWebpackConfig('vue'), {
   entry: {
     app: [config.build.webEntry]
   },
   output: {
-    path: config.build.distWebStatic,
-    filename: 'js/[name].[chunkhash].js',
-    chunkFilename: 'js/[id].[chunkhash].js'
+    path: config.build.distWeb,
+    filename: utils.joinPath(config.build.assetsPublicStaticPath, 'js/[name].[chunkhash].js'),
+    chunkFilename: utils.joinPath(config.build.assetsPublicStaticPath, 'js/[id].[chunkhash].js')
   },
   devtool: config.build.sourceMap ? '#source-map' : false,
   externals: {},
@@ -89,7 +89,7 @@ const webModeConfig = merge(baseWebpackConfig('vue'), {
  * Multiple entry files for weex mode, built from src/views
  */
 
-const weexModeConfig = merge(baseWebpackConfig('weex'), {
+var weexModeConfig = merge(baseWebpackConfig('weex'), {
   entry: utils.buildEntry(),
   output: {
     path: config.build.distWeexStatic,
@@ -110,7 +110,7 @@ const weexModeConfig = merge(baseWebpackConfig('weex'), {
  * Build now
  */
 
-const spinner = ora('Building for production...')
+var spinner = ora('Building for production...')
 spinner.start()
 
 webpack([webModeConfig, weexModeConfig], function (err, stats) {
